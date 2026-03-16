@@ -358,7 +358,7 @@
     <label class="form-label">manifest here ✍️</label>
     <div class="input-row">
       <input class="email-input" type="email" id="emailInput" placeholder="your@email.com" autocomplete="email"/>
-      <button class="cta-btn" onclick="handleSubmit()">join waitlist →</button>
+      <button class="cta-btn" type="button">join waitlist →</button>
     </div>
     <p class="free-note" id="freeNote">first 1,000 users get free access</p>
     <div class="success-msg" id="successMsg">
@@ -373,32 +373,42 @@
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+  var btn = document.querySelector('.cta-btn');
+  btn.addEventListener('click', handleSubmit);
+  btn.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    handleSubmit();
+  });
+  document.getElementById('emailInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') handleSubmit();
+  });
+});
+
 async function handleSubmit() {
-  const input = document.getElementById('emailInput');
-  const val = input.value.trim();
+  var input = document.getElementById('emailInput');
+  var val = input.value.trim();
   if (!val || !val.includes('@')) {
     input.style.borderColor = '#ff4d4d';
     input.style.boxShadow = '2px 2px 0px #ff4d4d';
     input.focus();
-    setTimeout(() => { input.style.borderColor = ''; input.style.boxShadow = ''; }, 1200);
+    setTimeout(function() {
+      input.style.borderColor = '';
+      input.style.boxShadow = '';
+    }, 1200);
     return;
   }
-
   try {
     await fetch('https://script.google.com/macros/s/AKfycbzyTsEGLcGc9vMCbv6END0Mg4g-ExrPqiMa_iBb_v4NPCh8CRiwxqpyuQxs31O-55-y/exec', {
       method: 'POST',
       mode: 'no-cors',
       body: JSON.stringify({ email: val }),
     });
-  } catch (e) { /* silent fail */ }
-
+  } catch(e) {}
   document.getElementById('freeNote').style.display = 'none';
   document.getElementById('emailInput').style.display = 'none';
   document.querySelector('.cta-btn').style.display = 'none';
   document.getElementById('successMsg').style.display = 'block';
 }
-document.getElementById('emailInput').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') handleSubmit();
-});
 </body>
 </html>
