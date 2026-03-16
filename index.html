@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manifest — The World's Fastest Digital Whiteboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,44 +18,49 @@
     overflow-x: hidden;
   }
 
+  /* NAV */
   nav {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 32px; position: relative; z-index: 10;
+    padding: 14px 20px; position: relative; z-index: 10;
   }
 
   .logo-wrap { display: flex; align-items: center; gap: 10px; }
 
   .logo-icon {
-    width: 44px; height: 44px; background: #fff;
+    width: 40px; height: 40px; background: #fff;
     border: 3px solid #2d2d2d;
     border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
     box-shadow: 3px 3px 0px 0px #2d2d2d;
     display: flex; align-items: center; justify-content: center; overflow: hidden;
+    flex-shrink: 0;
   }
 
   .logo-text {
     font-family: 'Kalam', cursive; font-weight: 700;
-    font-size: 22px; color: #2d2d2d; letter-spacing: -0.5px;
+    font-size: 20px; color: #2d2d2d; letter-spacing: -0.5px;
   }
 
   .nav-tag {
-    font-family: 'Patrick Hand', cursive; font-size: 13px;
+    font-family: 'Patrick Hand', cursive; font-size: 12px;
     background: #fff9c4; border: 2px solid #2d2d2d;
     border-radius: 12px 3px 10px 3px / 3px 10px 3px 12px;
-    padding: 4px 12px; box-shadow: 2px 2px 0px #2d2d2d;
+    padding: 3px 10px; box-shadow: 2px 2px 0px #2d2d2d;
     color: #2d2d2d; transform: rotate(1.5deg); display: inline-block;
+    white-space: nowrap;
   }
 
+  /* HERO */
   .hero {
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    padding: 30px 24px 20px; text-align: center;
+    padding: 16px 16px 32px; text-align: center;
     position: relative; max-width: 760px; margin: 0 auto;
   }
 
+  /* WHITEBOARD */
   .whiteboard-frame {
     position: relative; width: 100%; max-width: 620px;
-    margin: 0 auto 36px; transform: rotate(-1deg);
+    margin: 0 auto 28px; transform: rotate(-1deg);
   }
 
   .whiteboard-outer {
@@ -63,7 +71,7 @@
   }
 
   .tape {
-    position: absolute; top: -10px; width: 64px; height: 20px;
+    position: absolute; top: -10px; width: 56px; height: 18px;
     background: rgba(210,205,195,0.6);
     border: 1px dashed rgba(100,90,80,0.25);
     border-radius: 3px; z-index: 5;
@@ -73,9 +81,7 @@
 
   .wb-content {
     width: 100%; height: 100%; position: relative;
-    background: #fafaf8; display: flex;
-    align-items: flex-start; justify-content: flex-start;
-    padding: 10px 14px; overflow: hidden;
+    background: #fafaf8; overflow: hidden;
   }
 
   .wb-grid {
@@ -86,13 +92,14 @@
     background-size: 32px 32px; pointer-events: none;
   }
 
-  .wb-sketch { position: absolute; inset: 0; }
+  .wb-sketch { position: absolute; inset: 0; width: 100%; height: 100%; }
 
-  .headline-wrap { margin-bottom: 12px; position: relative; }
+  /* HEADLINE */
+  .headline-wrap { margin-bottom: 10px; position: relative; }
 
   h1 {
     font-family: 'Kalam', cursive; font-weight: 700;
-    font-size: clamp(34px, 7vw, 60px); line-height: 1.15;
+    font-size: clamp(30px, 8vw, 60px); line-height: 1.15;
     color: #2d2d2d; position: relative; display: inline-block;
   }
 
@@ -110,28 +117,31 @@
 
   .sub-headline {
     font-family: 'Patrick Hand', cursive;
-    font-size: clamp(15px, 3vw, 20px);
-    color: #2d2d2d; opacity: 0.75; margin-top: 10px; margin-bottom: 28px;
+    font-size: clamp(14px, 3.5vw, 20px);
+    color: #2d2d2d; opacity: 0.75; margin-top: 10px; margin-bottom: 24px;
     line-height: 1.5; max-width: 520px; text-align: center;
+    padding: 0 8px;
   }
 
+  /* FORM */
   .form-container {
     width: 100%; max-width: 480px; background: #fff;
     border: 3px solid #2d2d2d;
     border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
     box-shadow: 6px 6px 0px 0px #2d2d2d;
-    padding: 28px 28px 22px; position: relative; transform: rotate(0.4deg);
+    padding: 24px 24px 20px; position: relative; transform: rotate(0.4deg);
   }
 
   .form-label {
-    font-family: 'Kalam', cursive; font-weight: 700; font-size: 20px;
-    color: #2d2d2d; margin-bottom: 14px; display: block; text-align: left;
+    font-family: 'Kalam', cursive; font-weight: 700;
+    font-size: clamp(16px, 4vw, 20px);
+    color: #2d2d2d; margin-bottom: 12px; display: block; text-align: left;
   }
 
   .input-row { display: flex; gap: 10px; flex-wrap: wrap; }
 
   .email-input {
-    flex: 1; min-width: 180px; height: 48px;
+    flex: 1; min-width: 0; height: 48px;
     border: 2.5px solid #2d2d2d;
     border-radius: 225px 15px 255px 15px / 15px 255px 15px 225px;
     background: #ffffff;
@@ -139,6 +149,7 @@
     font-size: 16px; color: #2d2d2d; padding: 0 16px; outline: none;
     transition: border-color 0.15s, box-shadow 0.15s;
     box-shadow: 2px 2px 0px #2d2d2d;
+    width: 100%;
   }
 
   .email-input::placeholder { color: rgba(45,45,45,0.38); }
@@ -154,7 +165,7 @@
     border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
     font-family: 'Patrick Hand', cursive; font-size: 16px; font-weight: 600;
     color: #2d2d2d; cursor: pointer; box-shadow: 4px 4px 0px 0px #2d2d2d;
-    transition: all 0.1s; white-space: nowrap;
+    transition: all 0.1s; white-space: nowrap; width: 100%;
   }
 
   .cta-btn:hover {
@@ -170,17 +181,17 @@
     text-align: left; padding-left: 4px;
   }
 
-  .deco-arrow {
-    position: absolute; right: -38px; bottom: 38px;
-    transform: rotate(20deg); opacity: 0.5; pointer-events: none;
-  }
-
   .deco-star {
     position: absolute; top: -18px; right: 28px;
     font-family: 'Kalam', cursive; font-size: 22px;
     transform: rotate(12deg);
     animation: bounce 3s ease-in-out infinite;
     color: #ff4d4d; pointer-events: none; user-select: none;
+  }
+
+  .deco-arrow {
+    position: absolute; right: -38px; bottom: 38px;
+    transform: rotate(20deg); opacity: 0.5; pointer-events: none;
   }
 
   @keyframes bounce {
@@ -199,10 +210,48 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  @media (max-width: 540px) {
-    .input-row { flex-direction: column; }
+  /* ===================== */
+  /*   RESPONSIVE: MOBILE  */
+  /* ===================== */
+
+  @media (max-width: 600px) {
+    nav { padding: 12px 16px; }
+    .logo-icon { width: 36px; height: 36px; }
+    .logo-text { font-size: 18px; }
+    .nav-tag { font-size: 11px; padding: 3px 8px; }
+
+    .hero { padding: 12px 14px 28px; }
+
+    /* Taller aspect ratio so whiteboard content is readable */
+    .whiteboard-outer { aspect-ratio: 4/3; }
+
+    /* Hide tape on mobile — avoids overflow */
+    .tape { display: none; }
+
+    /* Reduce tilt on small screens */
+    .whiteboard-frame { transform: rotate(-0.5deg); margin-bottom: 22px; }
+
+    h1 { font-size: clamp(28px, 9vw, 42px); }
+    .sub-headline { font-size: 15px; margin-bottom: 20px; }
+
+    /* Form: stack vertically */
+    .form-container {
+      padding: 20px 18px 18px;
+      transform: rotate(0.2deg);
+      box-shadow: 4px 4px 0px 0px #2d2d2d;
+    }
+
+    .input-row { flex-direction: column; gap: 10px; }
     .email-input, .cta-btn { width: 100%; }
+
+    /* Hide desktop deco arrow */
     .deco-arrow { display: none; }
+  }
+
+  @media (max-width: 380px) {
+    .whiteboard-outer { aspect-ratio: 1/1; }
+    h1 { font-size: 26px; }
+    .form-label { font-size: 15px; }
   }
 </style>
 </head>
@@ -211,7 +260,7 @@
 <nav>
   <div class="logo-wrap">
     <div class="logo-icon">
-      <svg viewBox="0 0 60 60" fill="none" width="30" height="30">
+      <svg viewBox="0 0 60 60" fill="none" width="28" height="28">
         <path d="M10 48 C10 48 12 20 18 18 C22 17 28 32 30 36 C32 32 38 17 42 18 C48 20 50 48 50 48" stroke="#2d2d2d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
         <path d="M9 46 Q9.5 20 16 16" stroke="#2d2d2d" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.2"/>
       </svg>
@@ -236,7 +285,7 @@
             </marker>
           </defs>
 
-          <!-- KAWAII PINK HEART (top-left) -->
+          <!-- KAWAII PINK HEART -->
           <g transform="translate(8, 6)">
             <path d="M41 80 C20 62 8 50 8 36 C8 24 18 16 29 16 C34 16 39 19 41 22 C43 19 48 16 53 16 C64 16 74 24 74 36 C74 50 62 62 41 80 Z"
               fill="#ffb3c6" stroke="#2d2d2d" stroke-width="2.5" stroke-linejoin="round"/>
@@ -274,20 +323,15 @@
 
           <rect x="100" y="185" width="100" height="44" rx="8" stroke="#2d2d2d" stroke-width="1.5" fill="#fff" transform="rotate(-1 100 185)"/>
           <text x="150" y="212" font-family="Patrick Hand, cursive" font-size="12" fill="#2d2d2d" text-anchor="middle" transform="rotate(-1 150 212)">think it</text>
-
           <path d="M202 207 L240 207" stroke="#2d2d2d" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5" marker-end="url(#ah)"/>
-
           <rect x="242" y="185" width="100" height="44" rx="8" stroke="#2d2d2d" stroke-width="1.5" fill="#fff" transform="rotate(1 242 185)"/>
           <text x="292" y="212" font-family="Patrick Hand, cursive" font-size="12" fill="#2d2d2d" text-anchor="middle" transform="rotate(1 292 212)">draw it</text>
-
           <path d="M344 207 L382 207" stroke="#2d2d2d" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5" marker-end="url(#ah)"/>
-
           <rect x="384" y="185" width="100" height="44" rx="8" stroke="#ff4d4d" stroke-width="2" fill="rgba(255,77,77,0.05)" transform="rotate(-0.8 384 185)"/>
           <text x="434" y="212" font-family="Kalam, cursive" font-size="13" fill="#ff4d4d" text-anchor="middle" transform="rotate(-0.8 434 212)">manifest it!</text>
 
           <path d="M110 285 Q140 275 160 290 Q180 303 200 285" stroke="#2d2d2d" stroke-width="1" fill="none" opacity="0.12" stroke-linecap="round"/>
           <path d="M500 245 Q520 235 540 250 Q555 263 570 245" stroke="#2d2d2d" stroke-width="1" fill="none" opacity="0.12" stroke-linecap="round"/>
-
           <text x="90" y="180" font-family="Patrick Hand, cursive" font-size="14" fill="#ff4d4d" opacity="0.5">✦</text>
           <text x="560" y="125" font-family="Patrick Hand, cursive" font-size="10" fill="#2d5da1" opacity="0.5">✦</text>
           <text x="480" y="175" font-family="Patrick Hand, cursive" font-size="12" fill="#2d2d2d" opacity="0.25">✦</text>
@@ -329,7 +373,7 @@
 </div>
 
 <script>
-function handleSubmit() {
+async function handleSubmit() {
   const input = document.getElementById('emailInput');
   const val = input.value.trim();
   if (!val || !val.includes('@')) {
@@ -339,6 +383,15 @@ function handleSubmit() {
     setTimeout(() => { input.style.borderColor = ''; input.style.boxShadow = ''; }, 1200);
     return;
   }
+
+  Uncomment to connect Google Sheets:
+  try {
+  await fetch('https://script.google.com/macros/s/AKfycbzyTsEGLcGc9vMCbv6END0Mg4g-ExrPqiMa_iBb_v4NPCh8CRiwxqpyuQxs31O-55-y/exec', {
+  method: 'POST',
+  body: JSON.stringify({ email: val }),
+  });
+  } catch (e) { /* silent fail */ }
+
   document.getElementById('freeNote').style.display = 'none';
   document.getElementById('emailInput').style.display = 'none';
   document.querySelector('.cta-btn').style.display = 'none';
