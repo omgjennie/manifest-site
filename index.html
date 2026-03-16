@@ -404,11 +404,12 @@ async function handleSubmit() {
       mode: 'no-cors',
       body: JSON.stringify({ email: val }),
     });
-  } catch(e) {}
+ } catch(e) {}
   document.getElementById('freeNote').style.display = 'none';
   document.getElementById('emailInput').style.display = 'none';
   document.querySelector('.cta-btn').style.display = 'none';
   document.getElementById('successMsg').style.display = 'block';
 }
+</script>
 </body>
 </html>
