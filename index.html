@@ -383,11 +383,13 @@ async function handleSubmit() {
     setTimeout(() => { input.style.borderColor = ''; input.style.boxShadow = ''; }, 1200);
     return;
   }
+
   try {
-  await fetch('https://script.google.com/macros/s/AKfycbzyTsEGLcGc9vMCbv6END0Mg4g-ExrPqiMa_iBb_v4NPCh8CRiwxqpyuQxs31O-55-y/exec', {
-  method: 'POST',
-  body: JSON.stringify({ email: val }),
-  });
+    await fetch('https://script.google.com/macros/s/AKfycbzyTsEGLcGc9vMCbv6END0Mg4g-ExrPqiMa_iBb_v4NPCh8CRiwxqpyuQxs31O-55-y/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify({ email: val }),
+    });
   } catch (e) { /* silent fail */ }
 
   document.getElementById('freeNote').style.display = 'none';
@@ -398,7 +400,5 @@ async function handleSubmit() {
 document.getElementById('emailInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') handleSubmit();
 });
-</script>
-
 </body>
 </html>
